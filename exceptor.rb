@@ -11,12 +11,13 @@ module Exceptor
       r_msg, r_backtrace = e.message.split(very_random_string)
       traces = r_backtrace.split("\n").collect {|line| line.strip.gsub(/^\d:\s/, '')}
       traces = traces[3..(traces.length - 3)]
-      r_backtrace = traces.join("\n")
-      r_backtrace = r_backtrace.gsub(method_name_random_string, 'r_method_that_was_called_from_ruby')
-    
+      traces = traces.collect do |trace|
+        trace.gsub(method_name_random_string, 'r_method_that_was_called_from_ruby').strip
+      end
+
       e2 = Exception.new({
         :r_msg => r_msg.split(' : ')[1].strip,
-        :r_backtrace => r_backtrace.strip
+        :r_backtrace => traces
       })
       e2.set_backtrace(e.backtrace)
       raise e2

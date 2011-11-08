@@ -19,7 +19,7 @@ rescue Exception => e
   puts " "
   puts "R backtrace:"
   puts " "
-  puts e.message[:r_backtrace]
+  puts e.message[:r_backtrace].join("\n")
   puts " "
   puts "Ruby backtrace: "
   puts " "
