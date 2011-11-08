@@ -10,7 +10,7 @@ r.source("test.r") # include the r test
 
 begin
 
-  puts call_r_func(r, r.foo, 3) # this will fail
+  puts Exceptor.call_r_func(r, r.foo, 3) # this will fail
 
 rescue Exception => e
   puts "Error message from R: "
